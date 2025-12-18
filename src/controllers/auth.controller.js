@@ -108,7 +108,7 @@ const getUser = async (req, res) => {
 }
 
 const registerFoodPartner = async (req, res) => {
-    const { name, email, password } = req.body;
+    const { name, contactName, phone, address, email, password } = req.body;
 
     const isAccountAlreadyExists = await FoodPartner.findOne({
         email
@@ -125,6 +125,9 @@ const registerFoodPartner = async (req, res) => {
     const foodPartner = await FoodPartner.create({
         name,
         email,
+        contactName,
+        phone,
+        address,
         password: hashedPassword
     });
 
@@ -140,6 +143,9 @@ const registerFoodPartner = async (req, res) => {
             _id: foodPartner._id,
             email: foodPartner.email,
             name: foodPartner.name,
+            contactName: foodPartner.contactName,
+            phone: foodPartner.phone,
+            address: foodPartner.address
         }
     });
 }
