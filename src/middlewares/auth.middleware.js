@@ -1,8 +1,7 @@
-import { JsonWebTokenError } from "jsonwebtoken";
 import jwt from 'jsonwebtoken'
-import { FoodPartner } from "../models/foodpartner.model";
+import { FoodPartner } from "../models/foodpartner.model.js";
 
-const authFoodPartnerMiddleware = async (res, req, next) => {
+const authFoodPartnerMiddleware = async (req, res, next) => {
     const token = req.cookies.token;
 
     if (!token) {
@@ -24,4 +23,8 @@ const authFoodPartnerMiddleware = async (res, req, next) => {
             message: "Invalid token"
         })
     }
+}
+
+export default {
+    authFoodPartnerMiddleware
 }
