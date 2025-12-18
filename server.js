@@ -1,11 +1,13 @@
 // Start server
-import app from "./src/app.js";
-import connectDB from "./src/db/db.js";
 import dotenv from 'dotenv';
 
 dotenv.config({
     path: '.env'
 })
+
+import app from './src/app.js';
+import connectDB from "./src/db/db.js";
+import Config from './src/config/envConfig.js';
 
 connectDB();
 

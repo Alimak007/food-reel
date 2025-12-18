@@ -86,6 +86,27 @@ const logoutUser = async (req, res) => {
     });
 }
 
+const getUser = async (req, res) => {
+    const users = await Users.find({});
+
+    if (users.length == 0) {
+        return res.status(404).json({
+            message: "Users not found"
+        })
+    }
+
+    try {
+        return res.status(201).json({
+            message: "Users fetched",
+            user: users
+        });
+    } catch (error) {
+        return res.status(500).json({
+            message: `Something went wrong! ${error}`
+        })
+    }
+}
+
 const registerFoodPartner = async (req, res) => {
     const { name, email, password } = req.body;
 
@@ -167,11 +188,34 @@ const logoutFoodPartner = async (req, res) => {
     });
 }
 
+const getFoodPartner = async (req, res) => {
+    const foodPartner = await FoodPartner.find({});
+
+    if (foodPartner.length == 0) {
+        return res.status(404).json({
+            message: "No FoodPartner found"
+        });
+    }
+
+    try {
+        return res.status(200).json({
+            message: "FoodPartners fetched",
+            foodPartner: foodPartner
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message: `Something went wrong! ${error}`
+        })
+    }
+}
+
 export default {
     registerUser,
     loginUser,
     logoutUser,
     registerFoodPartner,
     loginFoodPartner,
-    logoutFoodPartner
+    logoutFoodPartner,
+    getUser,
+    getFoodPartner
 }
